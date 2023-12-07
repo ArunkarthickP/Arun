@@ -1,0 +1,9 @@
+{
+	"name": "Arun-New-Demo",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e4f95b06-0110-4d28-86d0-36067f4a0e86",
+		"tenantId": "959be5f6-cff7-4705-9343-2dba2398e67b"
+	}
+}
