@@ -1,0 +1,12 @@
+{
+	"name": "integrationRuntime1",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"linkedInfo": {
+				"resourceId": "/subscriptions/4aff3a0b-169d-4703-ac3c-862ae78d47bb/resourcegroups/Arun_ADF_Resourcegroup/providers/Microsoft.DataFactory/factories/Arun-ADF-AK-001/integrationruntimes/selfhost-integrationRuntime1",
+				"authorizationType": "Rbac"
+			}
+		}
+	}
+}
