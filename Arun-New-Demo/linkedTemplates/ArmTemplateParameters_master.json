@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "Arun-New-Demo"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
+			"value": "/subscriptions/4aff3a0b-169d-4703-ac3c-862ae78d47bb/resourcegroups/Arun_ADF_Resourcegroup/providers/Microsoft.DataFactory/factories/Arun-ADF-AK-001/integrationruntimes/selfhost-integrationRuntime1"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
