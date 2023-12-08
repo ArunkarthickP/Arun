@@ -1,0 +1,26 @@
+{
+	"name": "Demo event based trigger1",
+	"properties": {
+		"description": "Event Based trigger",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "sql to blob -copy-pipeline1",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/arun/blobs/Input",
+			"blobPathEndsWith": ".txt",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/4aff3a0b-169d-4703-ac3c-862ae78d47bb/resourceGroups/Arun_ADF_Resourcegroup/providers/Microsoft.Storage/storageAccounts/arunstorageaccount1",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

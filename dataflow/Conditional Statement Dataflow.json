@@ -1,0 +1,100 @@
+{
+	"name": "Conditional Statement Dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Dataset_employee",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "sinkset",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "sinkset",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				},
+				{
+					"dataset": {
+						"referenceName": "sinkset",
+						"type": "DatasetReference"
+					},
+					"name": "sink3"
+				},
+				{
+					"dataset": {
+						"referenceName": "sinkset",
+						"type": "DatasetReference"
+					},
+					"name": "sink4"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1on"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Employee Id} as string,",
+				"          Name as string,",
+				"          {Tenure in months} as string,",
+				"          {Department Id} as string,",
+				"          Country as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 split(equals({Department Id},'1'),",
+				"     equals({Department Id}, '2'),",
+				"     equals({Department Id},'3'),",
+				"     disjoint: false,",
+				"     partitionBy('hash', 1)) ~> split1on@(IT, Sales, Admin, Others)",
+				"split1on@Others sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['HR Employees New'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1",
+				"split1on@IT sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['IT Employees New'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          {Employee Id},",
+				"          Name,",
+				"          {Tenure in months},",
+				"          {Department Id},",
+				"          Country",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink2",
+				"split1on@Sales sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['Sales Employees New'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink3",
+				"split1on@Admin sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['Admin New'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink4"
+			]
+		}
+	}
+}

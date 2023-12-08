@@ -1,0 +1,46 @@
+{
+	"name": "SqlServerTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Demo_SqlServer",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"Database_name": "Demo"
+			}
+		},
+		"parameters": {
+			"Table_name": {
+				"type": "String"
+			},
+			"DBName_dataset": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "first_name",
+				"type": "varchar"
+			},
+			{
+				"name": "last_name",
+				"type": "varchar"
+			},
+			{
+				"name": "gender",
+				"type": "char"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Demo7"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

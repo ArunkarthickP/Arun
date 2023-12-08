@@ -1,0 +1,25 @@
+{
+	"name": "Workout",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Demo_SqlServer",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"Database_name": "Demo"
+			}
+		},
+		"parameters": {
+			"Soruce_table": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": ""
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

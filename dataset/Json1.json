@@ -1,0 +1,40 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "example_1.json",
+				"folderPath": "AK IP",
+				"container": "arun"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"fruit": {
+					"type": "string"
+				},
+				"size": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"color": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,16 @@
+{
+	"name": "SqlServerTable4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Demo_SqlServer",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"Database_name": "Dummy"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

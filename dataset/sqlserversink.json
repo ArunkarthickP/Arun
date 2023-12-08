@@ -1,0 +1,38 @@
+{
+	"name": "sqlserversink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Demo_SqlServer",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"Database_name": "Demo"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "first_name",
+				"type": "varchar"
+			},
+			{
+				"name": "last_name",
+				"type": "varchar"
+			},
+			{
+				"name": "gender",
+				"type": "char"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Demo5"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
