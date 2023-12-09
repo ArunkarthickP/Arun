@@ -1,5 +1,13 @@
 {
 	"name": "Arun-ADF-AK-001",
+	"properties": {
+		"globalParameters": {
+			"Root_Path": {
+				"type": "string",
+				"value": " arun / Input"
+			}
+		}
+	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
