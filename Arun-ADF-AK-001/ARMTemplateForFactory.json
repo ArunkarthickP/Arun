@@ -348,11 +348,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
+							"source": {},
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
@@ -364,26 +360,8 @@
 									"fileExtension": ".csv"
 								}
 							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
+							"enableStaging": false
 						},
-						"inputs": [
-							{
-								"referenceName": "SqlServerTable1",
-								"type": "DatasetReference",
-								"parameters": {
-									"Table_name": "demo",
-									"DBName_dataset": "demo"
-								}
-							}
-						],
 						"outputs": [
 							{
 								"referenceName": "sinkset",
@@ -400,7 +378,6 @@
 				"lastPublishTime": "2023-11-29T15:23:03Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]",
 				"[concat(variables('factoryId'), '/datasets/sinkset')]"
 			]
 		},
