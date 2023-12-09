@@ -16,21 +16,16 @@
 				"userProperties": [],
 				"typeProperties": {
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "BinarySink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".csv"
 						}
 					},
 					"enableStaging": false
 				},
 				"outputs": [
 					{
-						"referenceName": "sinkset",
+						"referenceName": "Output",
 						"type": "DatasetReference"
 					}
 				]
