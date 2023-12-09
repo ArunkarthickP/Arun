@@ -4,7 +4,7 @@
 		"globalParameters": {
 			"Root_Path": {
 				"type": "string",
-				"value": " arun / Input"
+				"value": "arun / Input"
 			},
 			"Filename": {
 				"type": "string",
