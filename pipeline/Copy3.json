@@ -50,7 +50,21 @@
 				"inputs": [
 					{
 						"referenceName": "DelimitedText11",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Root": {
+								"value": "@pipeline().globalParameters.Root_Path",
+								"type": "Expression"
+							},
+							"Directory": {
+								"value": "@pipeline().globalParameters.Directory",
+								"type": "Expression"
+							},
+							"Filename": {
+								"value": "@pipeline().globalParameters.Filename",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
