@@ -384,7 +384,20 @@
 							{
 								"referenceName": "DelimitedText11",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"Root": {
+										"value": "@pipeline().globalParameters.Root_Path",
+										"type": "Expression"
+									},
+									"Directory": {
+										"value": "@pipeline().globalParameters.Directory",
+										"type": "Expression"
+									},
+									"Filename": {
+										"value": "@pipeline().globalParameters.Filename",
+										"type": "Expression"
+									}
+								}
 							}
 						],
 						"outputs": [
@@ -3338,14 +3351,34 @@
 					"referenceName": "AzureBlobStorage1",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"Root": {
+						"type": "String"
+					},
+					"Directory": {
+						"type": "String"
+					},
+					"Filename": {
+						"type": "String"
+					}
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "Employee  (1) (1).csv",
-						"folderPath": "Input",
-						"container": "arun"
+						"fileName": {
+							"value": "@dataset().Filename",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().Root",
+							"type": "Expression"
+						}
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -5508,6 +5541,18 @@
 				"[concat(variables('factoryId'), '/datasets/Dataflow_department')]",
 				"[concat(variables('factoryId'), '/datasets/sinkset')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline5')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
 		}
 	]
 }

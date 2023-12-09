@@ -1,10 +1,14 @@
 {
 	"Root_Path": {
 		"type": "string",
-		"value": "arun / Input"
+		"value": "arun"
 	},
 	"Filename": {
 		"type": "string",
 		"value": "dbo.demo.csv"
+	},
+	"Directory": {
+		"type": "string",
+		"value": "Input"
 	}
 }
