@@ -15,17 +15,57 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"sink": {
-						"type": "BinarySink",
+					"source": {
+						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText11",
+						"type": "DatasetReference",
+						"parameters": {
+							"RootPath": {
+								"value": "@pipeline().globalParameters.Root_Path",
+								"type": "Expression"
+							},
+							"Filename": {
+								"value": "@pipeline().globalParameters.Filename",
+								"type": "Expression"
+							}
+						}
+					}
+				],
 				"outputs": [
 					{
-						"referenceName": "Output",
+						"referenceName": "sinkset",
 						"type": "DatasetReference"
 					}
 				]
