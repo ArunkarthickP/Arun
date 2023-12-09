@@ -591,16 +591,7 @@
 							{
 								"referenceName": "DelimitedText11",
 								"type": "DatasetReference",
-								"parameters": {
-									"RootPath": {
-										"value": "@pipeline().globalParameters.Root_Path",
-										"type": "Expression"
-									},
-									"Filename": {
-										"value": "@pipeline().globalParameters.Filename",
-										"type": "Expression"
-									}
-								}
+								"parameters": {}
 							}
 						],
 						"outputs": [

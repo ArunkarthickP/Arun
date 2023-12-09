@@ -384,16 +384,7 @@
 							{
 								"referenceName": "DelimitedText11",
 								"type": "DatasetReference",
-								"parameters": {
-									"RootPath": {
-										"value": "@pipeline().globalParameters.Root_Path",
-										"type": "Expression"
-									},
-									"Filename": {
-										"value": "@pipeline().globalParameters.Filename",
-										"type": "Expression"
-									}
-								}
+								"parameters": {}
 							}
 						],
 						"outputs": [
@@ -3347,27 +3338,14 @@
 					"referenceName": "AzureBlobStorage1",
 					"type": "LinkedServiceReference"
 				},
-				"parameters": {
-					"RootPath": {
-						"type": "String"
-					},
-					"Filename": {
-						"type": "String"
-					}
-				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().Filename",
-							"type": "Expression"
-						},
-						"container": {
-							"value": "@dataset().RootPath",
-							"type": "Expression"
-						}
+						"fileName": "Employee  (1) (1).csv",
+						"folderPath": "Input",
+						"container": "arun"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
