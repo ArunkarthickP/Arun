@@ -1,38 +1,30 @@
 {
-	"name": "sqlserversink",
+	"name": "SqlServerTable7",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Demo_SqlServer",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"Database_name": "ADF"
-			}
+			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "SqlServerTable",
 		"schema": [
 			{
-				"name": "id",
+				"name": "Id",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "first_name",
+				"name": "Name",
 				"type": "varchar"
 			},
 			{
-				"name": "last_name",
+				"name": "Gender",
 				"type": "varchar"
-			},
-			{
-				"name": "gender",
-				"type": "char"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": ""
+			"table": "Data_flow"
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }
