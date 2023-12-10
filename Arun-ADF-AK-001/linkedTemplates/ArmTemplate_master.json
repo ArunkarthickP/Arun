@@ -88,9 +88,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"Demo_SqlServer_connectionString": {
-						"value": "[parameters('Demo_SqlServer_connectionString')]"
 					}
 				}
 			},
@@ -111,6 +108,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Demo_SqlServer_connectionString": {
+						"value": "[parameters('Demo_SqlServer_connectionString')]"
 					}
 				}
 			},
@@ -159,6 +159,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'Arun-ADF-AK-001_ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "Arun-ADF-AK-001_ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Arun-ADF-AK-001_ArmTemplate_4')]"
 			]
 		}
 	]
