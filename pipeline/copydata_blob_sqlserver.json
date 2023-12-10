@@ -34,25 +34,11 @@
 						"sqlWriterUseTableLock": false,
 						"tableOption": "autoCreate"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
 						"referenceName": "DelimitedText14",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "SqlServerTable9",
 						"type": "DatasetReference"
 					}
 				]
