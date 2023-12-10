@@ -12,7 +12,7 @@
 		"type": "SqlServer",
 		"typeProperties": {
 			"connectionString": "integrated security=False;data source=DESKTOP-ETE10PC\\SQLEXPRESS;initial catalog=@{linkedService().Database_name};user id=sa",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkNjM2Mjk3ZC00NTJkLTQxODEtOGM3OS04M2FhMTg5ODZkYzgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1NjBiMTk1Yi0zYzkwLTQzNWEtYTU0YS00N2U4YjdhZTkyZDciLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "selfhost-integrationRuntime1",
