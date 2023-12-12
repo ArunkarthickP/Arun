@@ -24,6 +24,10 @@
 			"type": "string",
 			"defaultValue": "https://Arun-keyvault.vault.azure.net/"
 		},
+		"Web1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://www.careerpower.in/states-and-capitals-of-india.html"
+		},
 		"Demo event based trigger1_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/4aff3a0b-169d-4703-ac3c-862ae78d47bb/resourceGroups/Arun_ADF_Resourcegroup/providers/Microsoft.Storage/storageAccounts/arunstorageaccount1"
@@ -111,6 +115,9 @@
 					},
 					"Demo_SqlServer_connectionString": {
 						"value": "[parameters('Demo_SqlServer_connectionString')]"
+					},
+					"Web1_properties_typeProperties_url": {
+						"value": "[parameters('Web1_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -151,9 +158,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"Demo event based trigger1_properties_typeProperties_scope": {
-						"value": "[parameters('Demo event based trigger1_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -174,6 +178,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Demo event based trigger1_properties_typeProperties_scope": {
+						"value": "[parameters('Demo event based trigger1_properties_typeProperties_scope')]"
 					}
 				}
 			},

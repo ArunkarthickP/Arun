@@ -17,6 +17,9 @@
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://Arun-keyvault.vault.azure.net/"
 		},
+		"Web1_properties_typeProperties_url": {
+			"value": "https://www.careerpower.in/states-and-capitals-of-india.html"
+		},
 		"Demo event based trigger1_properties_typeProperties_scope": {
 			"value": "/subscriptions/4aff3a0b-169d-4703-ac3c-862ae78d47bb/resourceGroups/Arun_ADF_Resourcegroup/providers/Microsoft.Storage/storageAccounts/arunstorageaccount1"
 		},
