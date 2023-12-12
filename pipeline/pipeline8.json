@@ -19,22 +19,6 @@
 					"method": "POST",
 					"body": "'Sucess'"
 				}
-			},
-			{
-				"name": "WebHook1",
-				"type": "WebHook",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"url": "https://prod-79.eastus.logic.azure.com:443/workflows/b8f685e7f1054f02ad30572fa0e3272c/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=XAvPukRXrXG3MuZ8LrLvLOjJQLmjKY7UcSZXAywU3zY",
-					"method": "POST",
-					"body": "{Call back URL  : URL}",
-					"timeout": "00:10:00"
-				}
 			}
 		],
 		"annotations": []
