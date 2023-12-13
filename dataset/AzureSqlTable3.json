@@ -1,0 +1,27 @@
+{
+	"name": "AzureSqlTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Sink_table_name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@split(dataset().Sink_table_name,'.')[0]",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@split(dataset().Sink_table_name,'.' )[1]",
+				"type": "Expression"
+			}
+		}
+	}
+}
