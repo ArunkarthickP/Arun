@@ -2707,7 +2707,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Lookup1",
+						"name": "Get table_names",
 						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
@@ -2721,12 +2721,12 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "select table_schema, table_name from information_schema.tables",
+								"sqlReaderQuery": "select*from table_mapping where isactive=1",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
 							"dataset": {
-								"referenceName": "SqlServerTable9",
+								"referenceName": "SqlServerTable11",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -2738,7 +2738,7 @@
 						"type": "ForEach",
 						"dependsOn": [
 							{
-								"activity": "Lookup1",
+								"activity": "Get table_names",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -2747,13 +2747,14 @@
 						"userProperties": [],
 						"typeProperties": {
 							"items": {
-								"value": "@activity('Lookup1').output.value",
+								"value": "@activity('Get table_names').output.value",
 								"type": "Expression"
 							},
+							"batchCount": 25,
 							"activities": [
 								{
-									"name": "Script1",
-									"type": "Script",
+									"name": "Copy data1",
+									"type": "Copy",
 									"dependsOn": [],
 									"policy": {
 										"timeout": "0.12:00:00",
@@ -2763,22 +2764,53 @@
 										"secureInput": false
 									},
 									"userProperties": [],
-									"linkedServiceName": {
-										"referenceName": "AzureSqlDatabase2",
-										"type": "LinkedServiceReference"
-									},
 									"typeProperties": {
-										"scripts": [
-											{
-												"type": "Query",
-												"text": {
-													"value": "@item()",
+										"source": {
+											"type": "SqlServerSource",
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
+										},
+										"sink": {
+											"type": "AzureSqlSink",
+											"writeBehavior": "insert",
+											"sqlWriterUseTableLock": false,
+											"tableOption": "autoCreate",
+											"disableMetricsCollection": false
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "Local_sql_server",
+											"type": "DatasetReference",
+											"parameters": {
+												"DS_Table_name": {
+													"value": "@item().table_name",
 													"type": "Expression"
 												}
 											}
-										],
-										"scriptBlockExecutionTimeout": "02:00:00"
-									}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "AzureSqlTable3",
+											"type": "DatasetReference",
+											"parameters": {
+												"Sink_table_name": {
+													"value": "@item().table_name",
+													"type": "Expression"
+												}
+											}
+										}
+									]
 								}
 							]
 						}
@@ -2790,8 +2822,9 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SqlServerTable9')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable11')]",
+				"[concat(variables('factoryId'), '/datasets/Local_sql_server')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable3')]"
 			]
 		},
 		{
@@ -3791,6 +3824,56 @@
 				"type": "AzureSqlTable",
 				"schema": [],
 				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Sink_table_name": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@split(dataset().Sink_table_name,'.')[0]",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@split(dataset().Sink_table_name,'.' )[1]",
+						"type": "Expression"
+					}
+				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
@@ -4929,6 +5012,41 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Local_sql_server')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Demo_SqlServer",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"Database_name": "Demo"
+					}
+				},
+				"parameters": {
+					"DS_Table_name": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@split(dataset().DS_Table_name,'.' )[0]",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@split(dataset().DS_Table_name,'.' )[1]",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Demo_SqlServer')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Output')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -5144,6 +5262,62 @@
 					"schema": "dbo",
 					"table": "Demo7"
 				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Demo_SqlServer')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable10')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Demo_SqlServer",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"Database_name": "Demo"
+					}
+				},
+				"parameters": {
+					"Schema_name": {
+						"type": "String"
+					},
+					"Table_name": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().Schema_name",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().Table_name",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Demo_SqlServer')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable11')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Demo_SqlServer",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Demo_SqlServer')]"
@@ -6922,6 +7096,18 @@
 				"[concat(variables('factoryId'), '/datasets/Dataflow_department')]",
 				"[concat(variables('factoryId'), '/datasets/sinkset')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline14')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
 		}
 	]
 }
