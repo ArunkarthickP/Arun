@@ -133,12 +133,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"Demo_SqlServer_connectionString": {
-						"value": "[parameters('Demo_SqlServer_connectionString')]"
-					},
-					"Web1_properties_typeProperties_url": {
-						"value": "[parameters('Web1_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -159,6 +153,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Demo_SqlServer_connectionString": {
+						"value": "[parameters('Demo_SqlServer_connectionString')]"
+					},
+					"Web1_properties_typeProperties_url": {
+						"value": "[parameters('Web1_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -219,6 +219,26 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Arun-ADF-AK-001_ArmTemplate_5')]"
+			]
+		},
+		{
+			"name": "Arun-ADF-AK-001_ArmTemplate_7",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_7.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"Demo event based trigger1_properties_typeProperties_scope": {
 						"value": "[parameters('Demo event based trigger1_properties_typeProperties_scope')]"
@@ -226,7 +246,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'Arun-ADF-AK-001_ArmTemplate_5')]"
+				"[resourceId('Microsoft.Resources/deployments', 'Arun-ADF-AK-001_ArmTemplate_6')]"
 			]
 		}
 	]
