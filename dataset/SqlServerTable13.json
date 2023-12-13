@@ -1,0 +1,30 @@
+{
+	"name": "SqlServerTable13",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Demo_SqlServer",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"Database_name": "Demo"
+			}
+		},
+		"parameters": {
+			"Source_tablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@split(dataset().Source_tablename,'.')[0]",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@split(dataset().Source_tablename,'.' )[1]",
+				"type": "Expression"
+			}
+		}
+	}
+}
