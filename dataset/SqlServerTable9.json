@@ -1,0 +1,12 @@
+{
+	"name": "SqlServerTable9",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Demo_SqlServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
